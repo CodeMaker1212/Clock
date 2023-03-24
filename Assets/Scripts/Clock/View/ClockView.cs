@@ -16,8 +16,8 @@ namespace Clock
 
         private void OnEnable()
         {
-            _analogClock.OnInputUpdated -= HandleAnalogClockInputUpdate;
-            _digitalClock.OnInputUpdated -= HandleDigitalClockInputUpdate;
+            _analogClock.OnInputUpdated += HandleAnalogClockInputUpdate;
+            _digitalClock.OnInputUpdated += HandleDigitalClockInputUpdate;
             _dayTimeSwitchButton.onClick.AddListener(SwitchDayTimeFormat);
         }
 

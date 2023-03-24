@@ -10,7 +10,7 @@ namespace Clock
 
         private ClockController _controller;
 
-        private void Awake()
+        private void Start()
         {
             CurrentTimeFetcher currentTimeFetcher = new CurrentTimeFetcher();
             ISecondsCountdownMechanism secondsCountdownMechanism = new AsyncSecondsCounter();
