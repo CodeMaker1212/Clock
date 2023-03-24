@@ -58,7 +58,7 @@ namespace Clock
 
         private void HandleInputEnabling()
         {
-            _displayingFormat = _lastDisplayedHour > 12 ? DayTimeFormat.PM : DayTimeFormat.AM;
+            _displayingFormat = _lastDisplayedHour >= 12 ? DayTimeFormat.PM : DayTimeFormat.AM;
             SetDayTimeFormatButtonText(_displayingFormat.ToString());
             _digitalClock.DisplayTime(_analogClock.GetInputtedTime());
         }
