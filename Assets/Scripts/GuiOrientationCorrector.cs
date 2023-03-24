@@ -23,11 +23,11 @@ namespace Clock
             HandleScreenOrientationChange();
         }
 
+        // Проблема: OnTimeUpdated не вызывается в режиме настройки будильника, т.к. часы приостанавливаются.
         private void OnEnable() => _timeService.OnTimeUpdated += HandleTimeUpdate;
 
         private void OnDisable() => _timeService.OnTimeUpdated -= HandleTimeUpdate;
-
-        // Проблема: во время настройки будильника событие не вызывается.
+     
         private void HandleTimeUpdate()
         {
             if (_lastOrientation == Screen.orientation)
