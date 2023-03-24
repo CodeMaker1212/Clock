@@ -4,13 +4,13 @@ namespace Clock
 {
     public class TimeCorrector : ClockDecorator
     {
-        public TimeCorrector(IClock clock, CurrentTimeFetcher timeService) : base(clock)
+        public TimeCorrector(IClock clock, CurrentTimeFetcher timeFetcher) : base(clock)
         {
-            _currentTimeService = timeService;
+            _timeFetcher = timeFetcher;
             clock.OnTimeUpdated += HandleClockTimeUpdate;
         }
 
-        private CurrentTimeFetcher _currentTimeService;
+        private CurrentTimeFetcher _timeFetcher;
         private int _lastClockHour;
 
         public override event Action OnTimeUpdated;
@@ -25,7 +25,7 @@ namespace Clock
 
         public override void Run()
         {
-            _currentTimeService.GetTime(_ => SetTime(_));
+            _timeFetcher.GetTime(_ => SetTime(_));
             _lastClockHour = clock.Time.Hours;
             clock.OnTimeUpdated += OnTimeUpdated;
             clock.Run();
@@ -42,7 +42,7 @@ namespace Clock
             if (clock.Time.Hours != _lastClockHour)
             {
                 _lastClockHour = clock.Time.Hours;
-                _currentTimeService.GetTime(_ => SetTime(_));             
+                _timeFetcher.GetTime(_ => SetTime(_));             
             }                                
         }
     }
